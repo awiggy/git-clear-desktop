@@ -70,7 +70,7 @@ Section: devel
 Priority: optional
 Architecture: $architecture
 Installed-Size: $installed_size
-Depends: libgtk-3-0, libx11-6, libxcb1, libxkbcommon0, libgl1
+Depends: git, libgtk-3-0, libx11-6, libxcb1, libxkbcommon0, libgl1
 Maintainer: Git Agent Clear <61969770+awiggy@users.noreply.github.com>
 Homepage: https://github.com/awiggy/git-clear-desktop
 Description: Desktop Git helper built with Rust and egui

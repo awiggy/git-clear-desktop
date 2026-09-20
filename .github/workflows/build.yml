@@ -27,7 +27,7 @@ jobs:
           - name: macOS
             os: macos-latest
             artifact: git-agent-macos-installer
-            asset-path: dist/GitAgent-*-macOS.dmg
+            asset-path: dist/GitAgent-Clear-*-macOS.dmg
           - name: Windows
             os: windows-latest
             artifact: git-agent-windows-installer
@@ -51,6 +51,9 @@ jobs:
 
           if ($packageVersion -ne $tagVersion) {
             throw "Release tag ${{ github.ref_name }} does not match Cargo package version $packageVersion"
+          }
+          if (-not (Test-Path "docs/releases/v$tagVersion.md")) {
+            throw "Missing release notes: docs/releases/v$tagVersion.md"
           }
 
       - name: Cache Rust dependencies
@@ -226,15 +229,21 @@ jobs:
         run: |
           set -euo pipefail
 
-          release_title="Git Agent Clear $TAG_NAME"
+          release_version="${TAG_NAME#clear-v}"
+          release_title="Git Agent Clear v$release_version"
+          release_notes="docs/releases/v$release_version.md"
+          test -f "$release_notes"
+
+          (cd release-assets && sha256sum *.dmg *.exe *.deb > SHA256SUMS.txt)
 
           if gh release view "$TAG_NAME" >/dev/null 2>&1; then
-            gh release upload "$TAG_NAME" release-assets/* --clobber
+            echo "Release $TAG_NAME already exists; refusing to overwrite published installers." >&2
+            exit 1
           else
             gh release create "$TAG_NAME" release-assets/* \
               --verify-tag \
               --title "$release_title" \
-              --notes "Automated release for $TAG_NAME."
+              --notes-file "$release_notes"
           fi
 
   cleanup:

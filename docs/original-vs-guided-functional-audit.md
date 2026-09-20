@@ -1,12 +1,16 @@
-# Git Agent 原版与简洁版功能对照及验收记录
+# Git Agent Clear 与原版的功能对照及验收记录
 
-审计日期：2026-09-20
+历史审计日期：2026-09-20；发布说明核对：2026-09-21。
+
+本文保留先前记录的界面、源码、自动化和隔离仓库实操结果，不代表本次重新完成了所有原版/新版双端实操。真实账号、外部 AI 与应用内升级仍以 [实机验收清单](clear-edition-live-acceptance.md) 中的未勾选项为准。下面提到的临时仓库是历史测试环境，使用前需重新创建或检查。
 
 原版：`/Applications/Git Agent.app`
 
-简洁版：`/Users/shuke/Desktop/个人/git中台/dist/Git Agent Clear.app`（窗口内显示 `Git Agent Clear`）
+Git Agent Clear 本地构建：`dist/Git Agent Clear.app`（窗口内显示 `Git Agent Clear`）。
 
-## 最终结论
+当前源码版本为 v1.2.2；对应变更见 [v1.2.2 更新说明](releases/v1.2.2.md)。下文保留 v1.2.1 的历史操作与构建证据，旧哈希不用于验证新版下载包。
+
+## 已有功能接入结论与限制
 
 1. 原版与简洁版是两个可共存的 macOS 应用。Bundle ID、可执行文件、配置、日志、钥匙串和安装包名称均隔离。
 2. 简洁版不是静态套壳。页面按钮连接项目原有的 Git 命令、异步任务和设置存储；日常流程已在隔离仓库实际执行。
@@ -163,7 +167,7 @@
 
 ## 五、自动化与安装包验收
 
-最终结果：
+2026-09-20 本地构建结果（哈希对应当时产物，不是当前 GitHub Release 校验值）：
 
 - `cargo test`：675 项通过、0 失败；3 项需要真实外部 AI 凭据的 live 测试按设计忽略。
 - `cargo build --release --bins`：Release 构建通过。

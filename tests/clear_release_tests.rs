@@ -29,7 +29,7 @@ fn clear_tag_trigger_and_update_source_are_wired_into_the_build_workflow() {
     assert!(workflow.contains("/DOutputName=GitAgent-ClearSetup-"));
 
     // Clear releases get their own title.
-    assert!(workflow.contains("Git Agent Clear $TAG_NAME"));
+    assert!(workflow.contains("Git Agent Clear v$release_version"));
 
     // Tests must run against the safe default configuration, so the Clear update source
     // is injected only after the test steps, before the release builds.
