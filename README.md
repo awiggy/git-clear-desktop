@@ -62,6 +62,8 @@ Linux:   $XDG_DATA_HOME/git-agent-clear 或 ~/.local/share/git-agent-clear
 
 最近一次本机自动化回归为 **675 项通过、0 失败、3 项外部 AI 测试忽略**。各正式版本的跨平台测试和打包结果可在 [Actions](https://github.com/awiggy/git-clear-desktop/actions/workflows/build.yml) 中核对。
 
+v1.2.2 三个平台的测试与打包均已通过，正式下载附件已校验；具体测试数量、安装包信息与 SHA-256 见 [v1.2.2 发布核验记录](docs/releases/v1.2.2-verification.md)。
+
 自动化测试和安装包构建通过，不等于已经逐项完成所有真实账号场景。SSH、GPG、托管账号、真实 AI 请求及应用内升级的实机待验收项目，记录在 [真实凭据验收清单](docs/clear-edition-live-acceptance.md) 中；Git LFS 等功能需要对应外部工具。
 
 ## 构建
