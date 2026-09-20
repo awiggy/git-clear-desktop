@@ -866,7 +866,7 @@ where
                     .count(),
             ),
         hardware_stats,
-        source_tree_version: format!("Git Agent {}", env!("CARGO_PKG_VERSION")),
+        source_tree_version: format!("Git Agent Clear {}", env!("CARGO_PKG_VERSION")),
         git_version,
         is_system_git: true,
     })
@@ -6660,7 +6660,7 @@ summary add second
             get_remote_repos_ms: 11,
             total_files: 12,
             hardware_stats: Vec::new(),
-            source_tree_version: "Git Agent 0.1.0".to_owned(),
+            source_tree_version: "Git Agent Clear 0.1.0".to_owned(),
             git_version: "git version 2.45.1".to_owned(),
             is_system_git: true,
         };
@@ -6679,7 +6679,7 @@ summary add second
         assert_eq!(json["GetRemoteReposMs"], 11);
         assert_eq!(json["TotalFiles"], 12);
         assert_eq!(json["HardwareStats"].as_array().unwrap().len(), 0);
-        assert_eq!(json["SourceTreeVersion"], "Git Agent 0.1.0");
+        assert_eq!(json["SourceTreeVersion"], "Git Agent Clear 0.1.0");
         assert_eq!(json["GitVersion"], "git version 2.45.1");
         assert_eq!(json["IsSystemGit"], true);
     }
@@ -6701,7 +6701,7 @@ summary add second
 
         assert!(report.git_version.starts_with("git version "));
         assert!(report.is_system_git);
-        assert!(report.source_tree_version.starts_with("Git Agent "));
+        assert!(report.source_tree_version.starts_with("Git Agent Clear "));
         assert!(report.total_files >= 1);
 
         fs::remove_dir_all(&root)?;

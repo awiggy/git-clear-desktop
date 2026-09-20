@@ -1605,7 +1605,7 @@ impl MergeToolApp {
                 std::process::exit(2);
             }
         };
-        let title = format!("Git Agent Merge - {}", args.output.display());
+        let title = format!("Git Agent Clear · Merge - {}", args.output.display());
         let options = eframe::NativeOptions {
             viewport: egui::ViewportBuilder::default()
                 .with_title(title.clone())
@@ -4898,7 +4898,7 @@ fn merge_custom_title_bar(
     ui.allocate_new_ui(egui::UiBuilder::new().max_rect(title_rect), |ui| {
         ui.horizontal(|ui| {
             ui.label(
-                RichText::new("Git Agent Merge")
+                RichText::new("Git Agent Clear · Merge")
                     .strong()
                     .color(palette.text),
             );

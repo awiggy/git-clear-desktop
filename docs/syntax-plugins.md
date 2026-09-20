@@ -1,6 +1,6 @@
 # Syntax highlighting plugins
 
-Git Agent keeps the syntax engine in the application and loads language definitions as data.
+Git Agent Clear keeps the syntax engine in the application and loads language definitions as data.
 Plugins do not execute native code. A plugin is a directory below
 `data/plugins/syntax/<plugin-id>` containing this layout:
 
@@ -36,7 +36,7 @@ Agent maps those scopes to the active light or dark palette.
 
 ## JSX and TSX
 
-JSX and TSX remain language syntaxes, not React-only plugins. Git Agent can attach a framework
+JSX and TSX remain language syntaxes, not React-only plugins. Git Agent Clear can attach a framework
 context (`react`, `vue`, `preact`, or `solid`) using, in priority order:
 
 1. A per-file `@jsxImportSource` pragma.

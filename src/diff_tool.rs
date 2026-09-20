@@ -178,7 +178,7 @@ impl DiffToolApp {
                 std::process::exit(2);
             }
         };
-        let title = format!("Git Agent Diff - {}", args.title);
+        let title = format!("Git Agent Clear · Diff - {}", args.title);
         let options = eframe::NativeOptions {
             viewport: egui::ViewportBuilder::default()
                 .with_title(title.clone())

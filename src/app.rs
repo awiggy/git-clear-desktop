@@ -11234,7 +11234,7 @@ impl GitAgentApp {
         compact_action_dialog(ctx, self.tr("about.title"), 560.0, |ui| {
             ui.horizontal(|ui| {
                 ui.label(
-                    RichText::new("Git Agent")
+                    RichText::new("Git Agent Clear")
                         .size(18.0)
                         .strong()
                         .color(theme::text()),
@@ -12084,7 +12084,7 @@ impl GitAgentApp {
                     });
                 ui.vertical(|ui| {
                     ui.label(
-                        RichText::new("Git Agent")
+                        RichText::new("Git Agent Clear")
                             .size(16.0)
                             .strong()
                             .color(guided_text()),
@@ -29700,7 +29700,7 @@ fn menu_label(language: Language, key: &str) -> &'static str {
         }
         (Language::Chinese, "ssh_agent") => "\u{542f}\u{52a8}SSH\u{52a9}\u{624b}...",
         (Language::Chinese, "ssh_add_key") => "\u{6dfb}\u{52a0}SSH\u{5bc6}\u{94a5}...",
-        (Language::Chinese, "about") => "\u{5173}\u{4e8e} Git Agent",
+        (Language::Chinese, "about") => "\u{5173}\u{4e8e} Git Agent Clear",
         (Language::Chinese, "check_updates") => "\u{68c0}\u{67e5}\u{66f4}\u{65b0}",
         (_, "file") => "File(F)",
         (_, "edit") => "Edit(E)",
@@ -29796,7 +29796,7 @@ fn menu_label(language: Language, key: &str) -> &'static str {
         (_, "redo.toast.completed") => "Redid {action}. Undo is available.",
         (_, "ssh_agent") => "Start SSH Agent...",
         (_, "ssh_add_key") => "Add SSH Key...",
-        (_, "about") => "About Git Agent",
+        (_, "about") => "About Git Agent Clear",
         (_, "check_updates") => "Check for Updates",
         _ => "",
     }
@@ -38445,7 +38445,7 @@ fn empty_state(ui: &mut Ui, loading: bool, language: Language) {
                     .color(theme::text()),
             );
             ui.label(
-                RichText::new("Git Agent will render the commit graph with virtualized rows.")
+                RichText::new("Git Agent Clear will render the commit graph with virtualized rows.")
                     .color(theme::muted()),
             );
         });
@@ -42823,12 +42823,12 @@ mod ui_tests {
         assert!(!updater::SELF_UPDATE_ENABLED);
 
         let main_source = include_str!("main.rs");
-        assert!(main_source.contains(".with_title(\"Git Agent\")"));
-        assert!(main_source.contains("\"Git Agent\",\n        options,"));
+        assert!(main_source.contains(".with_title(\"Git Agent Clear\")"));
+        assert!(main_source.contains("\"Git Agent Clear\",\n        options,"));
 
         let package_script = include_str!("../installer/macos/package.sh");
         assert!(package_script.contains("app_name=\"Git Agent Clear\""));
-        assert!(package_script.contains("CFBundleDisplayName</key><string>Git Agent"));
+        assert!(package_script.contains("CFBundleDisplayName</key><string>Git Agent Clear</string>"));
         assert!(package_script.contains("io.github.awiggy.git-clear"));
         assert!(package_script.contains("CFBundleExecutable</key><string>git-agent-clear"));
         assert!(package_script.contains("GitAgent-Clear-$version-macOS.dmg"));
@@ -55112,7 +55112,7 @@ diff --git a/file.txt b/file.txt
         assert_ne!(chinese, english);
         assert!(!chinese.contains("<!-- lang:"));
         assert!(!english.contains("<!-- lang:"));
-        assert!(english.contains("Git Agent is a desktop client"));
+        assert!(english.contains("Git Agent Clear is a desktop client"));
 
         for key in [
             "about.title",

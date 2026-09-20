@@ -6,7 +6,7 @@
 
 ## 0. 独立应用前提
 
-- [x] 可见产品名不再带“引导版”；独立安装包应用名：`Git Agent Clear`，窗口显示 `Git Agent`。
+- [x] 产品名、安装包应用名、窗口标题及关于页面统一为 `Git Agent Clear`。
 - [x] 独立 Bundle ID：`io.github.awiggy.git-clear`。
 - [x] 独立主程序、配置目录、日志目录和钥匙串服务名。
 - [x] 原版和简洁版同时启动并独立打开不同测试仓库。

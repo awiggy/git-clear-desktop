@@ -251,7 +251,7 @@ const ZH_SOURCE: &[(&str, &str)] = &[
         "\u{6253}\u{5f00} SSH \u{8bbe}\u{7f6e}",
     ),
     ("ssh.install.later", "\u{7a0d}\u{540e}"),
-    ("about.title", "\u{5173}\u{4e8e} Git Agent"),
+    ("about.title", "\u{5173}\u{4e8e} Git Agent Clear"),
     ("about.version", "\u{7248}\u{672c}"),
     ("about.repository", "\u{9879}\u{76ee}\u{4e3b}\u{9875}"),
     ("tutorial.menu", "\u{65b0}\u{624b}\u{6559}\u{7a0b}"),
@@ -369,7 +369,7 @@ const ZH_SOURCE: &[(&str, &str)] = &[
     ),
     (
         "update.restart_required",
-        "\u{8bf7}\u{91cd}\u{542f} Git Agent \u{4ee5}\u{4f7f}\u{7528}\u{65b0}\u{7248}\u{672c}",
+        "\u{8bf7}\u{91cd}\u{542f} Git Agent Clear \u{4ee5}\u{4f7f}\u{7528}\u{65b0}\u{7248}\u{672c}",
     ),
     (
         "update.stopped",
@@ -1874,7 +1874,7 @@ const ZH_SOURCE: &[(&str, &str)] = &[
 ];
 
 const EN: &[(&str, &str)] = &[
-    ("app.title", "Git Agent"),
+    ("app.title", "Git Agent Clear"),
     ("app.subtitle", "fast visual Git client"),
     ("action.clone_new", "Clone/New"),
     ("action.open", "Open"),
@@ -2092,13 +2092,13 @@ const EN: &[(&str, &str)] = &[
     ),
     (
         "ssh.install.auto_detect_hint",
-        "When empty, Git Agent detects the executable for the selected SSH client and operating system. A manually selected file takes priority.",
+        "When empty, Git Agent Clear detects the executable for the selected SSH client and operating system. A manually selected file takes priority.",
     ),
     ("ssh.install.download", "Open Official Download"),
     ("ssh.install.use_openssh", "Use OpenSSH"),
     ("ssh.install.open_settings", "Open SSH Settings"),
     ("ssh.install.later", "Later"),
-    ("about.title", "About Git Agent"),
+    ("about.title", "About Git Agent Clear"),
     ("about.version", "Version"),
     ("about.repository", "Project home"),
     ("tutorial.menu", "Beginner Tutorial"),
@@ -2173,7 +2173,7 @@ const EN: &[(&str, &str)] = &[
         "Downloading and starting the installer",
     ),
     ("update.available", "An update is available"),
-    ("update.up_to_date", "Git Agent is up to date"),
+    ("update.up_to_date", "Git Agent Clear is up to date"),
     ("update.package", "Installer"),
     (
         "update.no_asset",
@@ -2186,7 +2186,7 @@ const EN: &[(&str, &str)] = &[
     ("update.installed", "The update is installed"),
     (
         "update.restart_required",
-        "Restart Git Agent to use the new version",
+        "Restart Git Agent Clear to use the new version",
     ),
     ("update.stopped", "The update task stopped unexpectedly"),
     ("repo.settings", "Repository Settings"),
@@ -3229,7 +3229,7 @@ const EN: &[(&str, &str)] = &[
 ];
 
 const ZH: &[(&str, &str)] = &[
-    ("app.title", "Git Agent"),
+    ("app.title", "Git Agent Clear"),
     ("app.subtitle", "高速可视化 Git 客户端"),
     ("action.open", "打开"),
     ("action.refresh", "刷新"),

@@ -1,9 +1,7 @@
 <!-- lang:zh-CN -->
-# Git Clear
+# Git Agent Clear
 
-Git Clear 是一款引导式界面的桌面 Git 客户端，使用 Rust 和 egui 构建。它把日常和高级 Git 操作组织成清晰的任务页面——项目、保存改动、远程同步、历史版本、分支、临时收起、合并冲突与设置。核心操作会说明影响范围、能否撤回和风险等级，让不熟悉 Git 命令行细节的人也能更可靠地完成操作。
-
-仓库与产品名称为 **Git Clear**；安装后的系统应用名称为 **Git Agent Clear**，应用窗口标题显示为 **Git Agent**。这三个名称指向同一个软件，不是三个不同版本。
+Git Agent Clear 是一款引导式界面的桌面 Git 客户端，使用 Rust 和 egui 构建。它把日常和高级 Git 操作组织成清晰的任务页面——项目、保存改动、远程同步、历史版本、分支、临时收起、合并冲突与设置。核心操作会说明影响范围、能否撤回和风险等级，让不熟悉 Git 命令行细节的人也能更可靠地完成操作。
 
 ## 主要能力
 
@@ -18,7 +16,7 @@ Git Clear 是一款引导式界面的桌面 Git 客户端，使用 Rust 和 egui
 
 ## 安装
 
-使用前请先安装 [Git](https://git-scm.com/downloads)，并确认终端中执行 `git --version` 能正常返回版本号。Git Clear 调用本机 Git 完成仓库操作，不会在安装包中重复捆绑 Git。
+使用前请先安装 [Git](https://git-scm.com/downloads)，并确认终端中执行 `git --version` 能正常返回版本号。Git Agent Clear 调用本机 Git 完成仓库操作，不会在安装包中重复捆绑 Git。
 
 从 [Releases](https://github.com/awiggy/git-clear-desktop/releases) 下载对应平台的安装包：
 

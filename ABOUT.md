@@ -1,5 +1,5 @@
 <!-- lang:zh-CN -->
-Git Agent 是面向日常 Git 工作的桌面客户端，提供工作区、提交历史、分支、远程仓库和冲突处理的一体化界面。
+Git Agent Clear 是面向日常 Git 工作的桌面客户端，提供工作区、提交历史、分支、远程仓库和冲突处理的一体化界面。
 
 ## 主要能力
 
@@ -12,7 +12,7 @@ Git Agent 是面向日常 Git 工作的桌面客户端，提供工作区、提�
 项目持续开发中。功能行为以当前版本和 Git 实际执行结果为准。
 
 <!-- lang:en-US -->
-Git Agent is a desktop client for everyday Git work. It combines workspaces, commit history, branches, remotes, and conflict resolution in one interface.
+Git Agent Clear is a desktop client for everyday Git work. It combines workspaces, commit history, branches, remotes, and conflict resolution in one interface.
 
 ## Key capabilities
 

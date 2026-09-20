@@ -204,7 +204,7 @@ fn asset_name_matches_os_stem(name: &str, os: &str, stem: &str) -> bool {
 
 fn validate_release_asset(asset: &ReleaseAsset) -> Result<()> {
     if !asset.download_url.starts_with(TRUSTED_DOWNLOAD_PREFIX) {
-        bail!("Update asset is not hosted by the official Git Agent release");
+        bail!("Update asset is not hosted by the official Git Agent Clear release");
     }
     let file_name = Path::new(&asset.name)
         .file_name()

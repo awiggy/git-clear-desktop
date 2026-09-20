@@ -32,7 +32,7 @@ cat > "$contents_dir/Info.plist" <<PLIST
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-  <key>CFBundleDisplayName</key><string>Git Agent</string>
+  <key>CFBundleDisplayName</key><string>Git Agent Clear</string>
   <key>CFBundleExecutable</key><string>git-agent-clear</string>
   <key>CFBundleIconFile</key><string>GitAgent</string>
   <key>CFBundleIdentifier</key><string>io.github.awiggy.git-clear</string>

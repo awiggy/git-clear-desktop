@@ -17,7 +17,9 @@ fn main() {
 
     #[cfg(target_os = "windows")]
     winresource::WindowsResource::new()
+        .set("ProductName", "Git Agent Clear")
+        .set("FileDescription", "Git Agent Clear")
         .set_icon("assets/icons/git-agent.ico")
         .compile()
-        .expect("failed to embed the Git Agent Windows icon");
+        .expect("failed to embed the Git Agent Clear Windows icon");
 }

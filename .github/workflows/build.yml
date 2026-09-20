@@ -3,7 +3,6 @@ name: Build
 on:
   push:
     tags:
-      - "v*"
       - "clear-v*"
 
 permissions:
@@ -24,7 +23,6 @@ jobs:
             os: ubuntu-latest
             artifact: git-agent-linux-installer
             asset-path: |
-              dist/GitAgent_*.deb
               dist/GitAgent-Clear_*.deb
           - name: macOS
             os: macos-latest
@@ -34,7 +32,6 @@ jobs:
             os: windows-latest
             artifact: git-agent-windows-installer
             asset-path: |
-              dist/GitAgentSetup-*.exe
               dist/GitAgent-ClearSetup-*.exe
 
     steps:
@@ -145,10 +142,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p dist
-          edition="upstream"
-          if [[ "${{ github.ref_name }}" == clear-v* ]]; then
-            edition="clear"
-          fi
+          edition="clear"
           bash installer/linux/package-deb.sh \
             "${{ github.ref_name }}" \
             "$(dpkg --print-architecture)" \
@@ -232,10 +226,7 @@ jobs:
         run: |
           set -euo pipefail
 
-          release_title="Git Agent $TAG_NAME"
-          if [[ "$TAG_NAME" == clear-v* ]]; then
-            release_title="Git Agent Clear $TAG_NAME"
-          fi
+          release_title="Git Agent Clear $TAG_NAME"
 
           if gh release view "$TAG_NAME" >/dev/null 2>&1; then
             gh release upload "$TAG_NAME" release-assets/* --clobber

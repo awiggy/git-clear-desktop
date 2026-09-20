@@ -11,16 +11,9 @@ version="${version#clear-v}"
 architecture="$2"
 binary_dir="$3"
 output_dir="$4"
-edition="${5:-upstream}"
+edition="${5:-clear}"
 
 case "$edition" in
-  upstream)
-    package_name="git-agent"
-    display_name="Git Agent"
-    asset_stem="GitAgent"
-    install_dir="git-agent"
-    main_executable="git-agent"
-    ;;
   clear)
     package_name="git-agent-clear"
     display_name="Git Agent Clear"
@@ -29,7 +22,7 @@ case "$edition" in
     main_executable="git-agent-clear"
     ;;
   *)
-    echo "unknown edition: $edition (expected upstream or clear)" >&2
+    echo "unknown edition: $edition (expected clear)" >&2
     exit 2
     ;;
 esac
@@ -78,7 +71,7 @@ Priority: optional
 Architecture: $architecture
 Installed-Size: $installed_size
 Depends: libgtk-3-0, libx11-6, libxcb1, libxkbcommon0, libgl1
-Maintainer: Git Clear <61969770+awiggy@users.noreply.github.com>
+Maintainer: Git Agent Clear <61969770+awiggy@users.noreply.github.com>
 Homepage: https://github.com/awiggy/git-clear-desktop
 Description: Desktop Git helper built with Rust and egui
  $display_name provides repository, history, diff, and merge workflows in a desktop application.

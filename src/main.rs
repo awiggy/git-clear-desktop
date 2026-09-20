@@ -27,7 +27,7 @@ fn main() -> eframe::Result<()> {
     );
     let options = eframe::NativeOptions {
         viewport: eframe::egui::ViewportBuilder::default()
-            .with_title("Git Agent")
+            .with_title("Git Agent Clear")
             .with_icon(app_icon_data())
             .with_decorations(false)
             .with_transparent(true)
@@ -38,7 +38,7 @@ fn main() -> eframe::Result<()> {
     };
 
     let result = eframe::run_native(
-        "Git Agent",
+        "Git Agent Clear",
         options,
         Box::new(|cc| {
             prefer_rounded_window_corners(cc);

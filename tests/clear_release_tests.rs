@@ -11,7 +11,8 @@ fn clear_tag_trigger_and_update_source_are_wired_into_the_build_workflow() {
     // The version check must strip the edition prefix before comparing with Cargo.toml.
     assert!(workflow.contains("-replace '^clear-v',''"));
 
-    // Clear builds compile in the edition's update source; upstream builds stay untouched.
+    // Only Clear release tags are published from this repository.
+    assert!(!workflow.contains("- \"v*\""));
     assert!(workflow.contains("startsWith(github.ref_name, 'clear-v')"));
     assert!(workflow.contains("GIT_AGENT_SELF_UPDATE=1"));
     assert!(workflow.contains("GIT_AGENT_UPDATE_TAG_PREFIX=clear-v"));
@@ -51,18 +52,19 @@ fn linux_packaging_supports_a_clear_edition_variant() {
     assert!(script.contains("${asset_stem}_${version}_${architecture}.deb"));
     // The edition version strip keeps clear-v1.3.15 -> 1.3.15.
     assert!(script.contains("version=\"${version#clear-v}\""));
-    // The upstream path remains the default.
-    assert!(script.contains("edition=\"${5:-upstream}\""));
+    // Manual builds use the same identity as release builds.
+    assert!(script.contains("edition=\"${5:-clear}\""));
 }
 
 #[test]
 fn windows_installer_accepts_clear_edition_overrides() {
     let installer = include_str!("../installer/windows/git-agent.iss");
 
-    // Defaults preserve the upstream installer.
-    assert!(installer.contains("#define AppName \"Git Agent\""));
-    assert!(installer.contains("#define OutputName \"GitAgentSetup-\""));
-    assert!(installer.contains("#define InstallDirName \"GitAgent\""));
+    // Defaults match the published Clear installer, including its upgrade identity.
+    assert!(installer.contains("#define AppName \"Git Agent Clear\""));
+    assert!(installer.contains("#define OutputName \"GitAgent-ClearSetup-\""));
+    assert!(installer.contains("#define InstallDirName \"GitAgentClear\""));
+    assert!(installer.contains("#define AppGuid \"9C4E7A21-5B3D-4E6F-8A1C-2D0E4F6A7B8C\""));
     // Every identity knob can be overridden from the CI command line.
     assert!(installer.contains("#ifndef AppGuid"));
     assert!(installer.contains("AppId={{{#AppGuid}}}"));

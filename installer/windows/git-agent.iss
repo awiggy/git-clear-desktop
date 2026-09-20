@@ -1,5 +1,5 @@
 #ifndef AppName
-#define AppName "Git Agent"
+#define AppName "Git Agent Clear"
 #endif
 #ifndef AppVersion
 #define AppVersion "dev"
@@ -13,13 +13,13 @@
 // Clear-edition builds pass a distinct GUID, install directory, group, and output name so
 // the two editions coexist and uninstall independently.
 #ifndef AppGuid
-#define AppGuid "7F2D2B68-AB4B-4B9A-9E91-F3574BA53C5D"
+#define AppGuid "9C4E7A21-5B3D-4E6F-8A1C-2D0E4F6A7B8C"
 #endif
 #ifndef InstallDirName
-#define InstallDirName "GitAgent"
+#define InstallDirName "GitAgentClear"
 #endif
 #ifndef OutputName
-#define OutputName "GitAgentSetup-"
+#define OutputName "GitAgent-ClearSetup-"
 #endif
 
 [Setup]
@@ -57,4 +57,4 @@ Name: "{group}\{#AppName}"; Filename: "{app}\git-agent.exe"; WorkingDir: "{app}"
 Name: "{group}\Uninstall {#AppName}"; Filename: "{uninstallexe}"
 
 [Run]
-Filename: "{app}\git-agent.exe"; Description: "Launch Git Agent"; Flags: nowait postinstall skipifsilent
+Filename: "{app}\git-agent.exe"; Description: "Launch Git Agent Clear"; Flags: nowait postinstall skipifsilent

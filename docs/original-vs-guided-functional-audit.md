@@ -4,7 +4,7 @@
 
 原版：`/Applications/Git Agent.app`
 
-简洁版：`/Users/shuke/Desktop/个人/git中台/dist/Git Agent Clear.app`（窗口内显示 `Git Agent`）
+简洁版：`/Users/shuke/Desktop/个人/git中台/dist/Git Agent Clear.app`（窗口内显示 `Git Agent Clear`）
 
 ## 最终结论
 
@@ -136,7 +136,7 @@
 | 隔离项 | 原版 | 简洁版 | 结果 |
 |---|---|---|---|
 | Finder 应用名 | Git Agent | Git Agent Clear | ✅ |
-| 窗口显示名 | Git Agent | Git Agent | 允许同名显示 |
+| 窗口显示名 | Git Agent | Git Agent Clear | 产品名称统一 |
 | Bundle ID | `io.github.adoin.git-agent` | `io.github.awiggy.git-clear` | ✅ |
 | 可执行文件 | `git-agent` | `git-agent-clear` | ✅ |
 | 配置目录 | `~/Library/Application Support/Git Agent` | `~/Library/Application Support/Git Agent Clear` | ✅ |
@@ -175,3 +175,6 @@
 ## 六、版本沿革注记
 
 - 2026-09-20 项目以独立产品身份迁移至 `github.com/awiggy/git-clear-desktop`，本地、安装包和 Release 版本统一为 `v1.2.1`（Git 标签 `clear-v1.2.1`）。
+- 2026-09-21 产品名称统一为 `Git Agent Clear`，覆盖主窗口、页头、关于、中英文提示、Diff/Merge 工具和各平台打包元数据。配置目录、钥匙串、Bundle ID 和 Clear 安装包文件名保留兼容。上文 2026-09-20 的安装包哈希属于更名前的构建；已发布的 `clear-v1.2.1` 标签及附件不覆盖。
+- 名称统一回归：675 项通过、0 失败、3 项外部 AI 测试忽略；覆盖应用身份隔离、窗口拖动/控件命中、关于文案与三平台打包配置。Windows/Linux 本轮核对了打包配置，未重新生成这两个平台的安装包。
+- 名称统一后的本地 macOS v1.2.1 已重新构建，应用签名和 DMG 校验通过；当前 `dist/GitAgent-Clear-1.2.1-macOS.dmg` 的 SHA-256 为 `a3ae3a5216271732263babb28a9c5eb62d6eb8d122f8c5361e6f7398c25e693c`。旧本地应用及安装包保存在 `dist/before-name-unification.*` 备份目录。
