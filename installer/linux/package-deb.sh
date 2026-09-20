@@ -78,8 +78,8 @@ Priority: optional
 Architecture: $architecture
 Installed-Size: $installed_size
 Depends: libgtk-3-0, libx11-6, libxcb1, libxkbcommon0, libgl1
-Maintainer: Git Agent <adoin@qq.com>
-Homepage: https://github.com/awiggy/git-clear
+Maintainer: Git Clear <61969770+awiggy@users.noreply.github.com>
+Homepage: https://github.com/awiggy/git-clear-desktop
 Description: Desktop Git helper built with Rust and egui
  $display_name provides repository, history, diff, and merge workflows in a desktop application.
 CONTROL

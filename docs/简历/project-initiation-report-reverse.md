@@ -36,7 +36,7 @@ Git 是软件行业的事实标准，但学习曲线陡峭：暂存区、HEAD、
 
 ## 4. 市场与竞品位置
 
-详见 PRD 第 8 节（`docs/product-prd-reverse.md`）。定位结论：
+详见 PRD 第 8 节（`docs/简历/product-prd-reverse.md`）。定位结论：
 
 - 横向空位：**免费 + 全功能 + 引导式安全操作**，在 GitHub Desktop（免费残血）与 Tower/GitKraken（全功能收费）之间。
 - 纵向威胁：AI 代执行 git。应对：把 AI 定位为解释者和建议者，人保留确认权——这恰好强化"安全网"叙事而非削弱。

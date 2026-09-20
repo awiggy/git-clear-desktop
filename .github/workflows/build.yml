@@ -106,11 +106,11 @@ jobs:
             echo "GIT_AGENT_SELF_UPDATE=1"
             echo "GIT_AGENT_UPDATE_TAG_PREFIX=clear-v"
             echo "GIT_AGENT_UPDATE_ASSET_STEM=GitAgent-Clear"
-            echo "GIT_AGENT_UPDATE_REPOSITORY_URL=https://github.com/awiggy/git-clear"
-            echo "GIT_AGENT_UPDATE_RELEASE_PAGE_URL=https://github.com/awiggy/git-clear/releases"
-            echo "GIT_AGENT_UPDATE_LATEST_API=https://api.github.com/repos/awiggy/git-clear/releases/latest"
-            echo "GIT_AGENT_UPDATE_RELEASES_API=https://api.github.com/repos/awiggy/git-clear/releases"
-            echo "GIT_AGENT_UPDATE_DOWNLOAD_PREFIX=https://github.com/awiggy/git-clear/releases/download/"
+            echo "GIT_AGENT_UPDATE_REPOSITORY_URL=https://github.com/awiggy/git-clear-desktop"
+            echo "GIT_AGENT_UPDATE_RELEASE_PAGE_URL=https://github.com/awiggy/git-clear-desktop/releases"
+            echo "GIT_AGENT_UPDATE_LATEST_API=https://api.github.com/repos/awiggy/git-clear-desktop/releases/latest"
+            echo "GIT_AGENT_UPDATE_RELEASES_API=https://api.github.com/repos/awiggy/git-clear-desktop/releases"
+            echo "GIT_AGENT_UPDATE_DOWNLOAD_PREFIX=https://github.com/awiggy/git-clear-desktop/releases/download/"
           } >> "$GITHUB_ENV"
 
       - name: Build release binaries

@@ -16,7 +16,7 @@ Git Clear 是一款引导式界面的桌面 Git 客户端，使用 Rust 和 egui
 
 ## 安装
 
-从 [Releases](https://github.com/awiggy/git-clear/releases) 下载对应平台的安装包：
+从 [Releases](https://github.com/awiggy/git-clear-desktop/releases) 下载对应平台的安装包：
 
 - **macOS**：`GitAgent-Clear-<版本>-macOS.dmg`（Apple Silicon/Intel 通用），打开后拖入应用程序文件夹
 - **Windows**：`GitAgent-ClearSetup-<版本>.exe`，安装向导可选安装路径
@@ -55,4 +55,3 @@ git push origin clear-v1.2.1
 ```
 
 以此方式构建的安装包会启用应用内自更新，更新源为本仓库的 Release 流。
-

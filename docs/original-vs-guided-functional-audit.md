@@ -1,10 +1,10 @@
 # Git Agent 原版与简洁版功能对照及验收记录
 
-审计日期：2026-09-03
+审计日期：2026-09-20
 
 原版：`/Applications/Git Agent.app`
 
-简洁版：`/Users/shuke/Desktop/git中台/dist/Git Agent Clear.app`（窗口内显示 `Git Agent`）
+简洁版：`/Users/shuke/Desktop/个人/git中台/dist/Git Agent Clear.app`（窗口内显示 `Git Agent`）
 
 ## 最终结论
 
@@ -12,7 +12,7 @@
 2. 简洁版不是静态套壳。页面按钮连接项目原有的 Git 命令、异步任务和设置存储；日常流程已在隔离仓库实际执行。
 3. 用户不需要回到原版主界面。原版功能已从“高级工具”或“设置与电脑工具”进入；部分复杂功能继续复用项目原有的真实对话框/编辑器，而不是重新造一份无后端的演示页面。
 4. 没有“只能看、不能用”的占位功能。按钮在缺少仓库、远程、冲突或外部账号等前置条件时会禁用或解释原因。
-5. 唯一有意不同的是自动更新：简洁版尚无独立 Release 下载源，所以“检查更新”会明确说明不可更新，绝不下载原版安装包覆盖简洁版。
+5. 简洁版已经使用独立仓库和独立 Release 下载源；“检查更新”只查询 `awiggy/git-clear-desktop`，不会下载原版安装包覆盖简洁版。
 
 ## 验收口径
 
@@ -129,7 +129,7 @@
 | 访达/终端/刷新/快捷键 | 设置与电脑工具 | 原系统调用、无缓存刷新和导航 | ✅ 回归 + 界面 |
 | 新手说明 | 顶栏开关 | 仅控制右侧解释栏，不切换旧界面；状态持久化 | ✅ 实操重启 + 回归 |
 | 关于 | 设置与电脑工具 | 独立产品名称和版本 | ✅ 界面 |
-| 自动更新 | 设置与电脑工具 | 独立源缺失时明确失败，不连接原版源 | ✅ 界面 + 回归；有意差异 |
+| 自动更新 | 设置与电脑工具 | 独立查询 `awiggy/git-clear-desktop` 的 Release | ✅ 回归；首次正式 Release 发布后补做在线升级验收 |
 
 ## 三、独立应用隔离结果
 
@@ -137,13 +137,13 @@
 |---|---|---|---|
 | Finder 应用名 | Git Agent | Git Agent Clear | ✅ |
 | 窗口显示名 | Git Agent | Git Agent | 允许同名显示 |
-| Bundle ID | `io.github.adoin.git-agent` | `io.github.adoin.git-agent-clear` | ✅ |
+| Bundle ID | `io.github.adoin.git-agent` | `io.github.awiggy.git-clear` | ✅ |
 | 可执行文件 | `git-agent` | `git-agent-clear` | ✅ |
 | 配置目录 | `~/Library/Application Support/Git Agent` | `~/Library/Application Support/Git Agent Clear` | ✅ |
 | 日志目录 | 原版目录 | `~/Library/Application Support/Git Agent Clear/logs` | ✅ |
 | AI 钥匙串服务 | Git Agent | Git Agent Clear | ✅；兼容迁移旧简洁版密钥 |
-| 安装包 | 原版发布名 | `GitAgent-Clear-1.3.14-macOS.dmg` | ✅ |
-| 同时运行 | `io.github.adoin.git-agent` | `io.github.adoin.git-agent-clear` | ✅ 已实测 |
+| 安装包 | 原版发布名 | `GitAgent-Clear-1.2.1-macOS.dmg` | ✅ |
+| 同时运行 | `io.github.adoin.git-agent` | `io.github.awiggy.git-clear` | ✅ 已实测 |
 
 ## 四、实际操作记录
 
@@ -158,20 +158,20 @@
 - 设置页实际切换到深色再恢复浅色；重启后仓库、主题和新手说明开关均恢复。
 - 关闭新手说明后仍为简洁界面，不会出现原版主界面。
 - “忽略规则”实际打开当前仓库 `.gitignore` 编辑器。
-- “检查更新”在无独立源时显示明确失败说明；“关于”显示 `Git Agent 1.3.14`。
+- “检查更新”只访问独立仓库的 Release；“关于”和安装包元数据显示版本 `1.2.1`。
 - 多次重新启动简洁版，未再次出现连续四次钥匙串授权弹窗。
 
 ## 五、自动化与安装包验收
 
 最终结果：
 
-- `cargo test`：650 项通过、0 失败；3 项需要真实外部 AI 凭据的 live 测试按设计忽略。
+- `cargo test`：675 项通过、0 失败；3 项需要真实外部 AI 凭据的 live 测试按设计忽略。
 - `cargo build --release --bins`：Release 构建通过。
 - macOS `.app`：Bundle ID、可执行文件和资源结构核对通过。
 - `codesign --verify --deep --strict`：通过。
-- `.dmg`：生成并由 `hdiutil verify` 校验通过；SHA-256 为 `d9361a578ee1271c4c47a541eea1388bf633297e1c63264ec2172eb0dcf2370e`。
-- Git 工作树：仅保留用户自己的 `.DS_Store`，不纳入提交。
+- `.dmg`：生成并由 `hdiutil verify` 校验通过；SHA-256 为 `64993bf568b75bf17acdcd4fcd98cce4f376795adb3e1e765535de7a257ee9c3`。
+- Git 工作树：`.DS_Store` 已加入忽略规则，不纳入提交。
 
 ## 六、版本沿革注记
 
-- 2026-09-07 项目独立为 Git Clear，发布于 `github.com/awiggy/git-clear`，版本自 `clear-v1.2.1` 起重新计数，历史从此重新开始演进。
+- 2026-09-20 项目以独立产品身份迁移至 `github.com/awiggy/git-clear-desktop`，本地、安装包和 Release 版本统一为 `v1.2.1`（Git 标签 `clear-v1.2.1`）。

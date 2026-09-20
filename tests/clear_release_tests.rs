@@ -17,9 +17,9 @@ fn clear_tag_trigger_and_update_source_are_wired_into_the_build_workflow() {
     assert!(workflow.contains("GIT_AGENT_UPDATE_TAG_PREFIX=clear-v"));
     assert!(workflow.contains("GIT_AGENT_UPDATE_ASSET_STEM=GitAgent-Clear"));
     // The Clear update feed lives in the edition's own repository, never the upstream one.
-    assert!(workflow.contains("GIT_AGENT_UPDATE_RELEASES_API=https://api.github.com/repos/awiggy/git-clear/releases"));
+    assert!(workflow.contains("GIT_AGENT_UPDATE_RELEASES_API=https://api.github.com/repos/awiggy/git-clear-desktop/releases"));
     assert!(
-        workflow.contains("GIT_AGENT_UPDATE_DOWNLOAD_PREFIX=https://github.com/awiggy/git-clear/releases/download/")
+        workflow.contains("GIT_AGENT_UPDATE_DOWNLOAD_PREFIX=https://github.com/awiggy/git-clear-desktop/releases/download/")
     );
 
     // The updater looks for these exact Clear asset names.
@@ -76,5 +76,5 @@ fn macos_packaging_strips_the_clear_tag_prefix_from_versions() {
 
     assert!(script.contains("version=\"${version#clear-v}\""));
     assert!(script.contains("app_name=\"Git Agent Clear\""));
-    assert!(script.contains("io.github.adoin.git-agent-clear"));
+    assert!(script.contains("io.github.awiggy.git-clear"));
 }

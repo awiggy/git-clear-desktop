@@ -26,7 +26,7 @@
 AppId={{{#AppGuid}}}
 AppName={#AppName}
 AppVersion={#AppVersion}
-AppPublisher=adoin
+AppPublisher=awiggy
 DefaultDirName={localappdata}\Programs\{#InstallDirName}
 DisableDirPage=no
 DisableProgramGroupPage=no

@@ -1,3 +1,4 @@
 /target
 /dist/
 /theme.local.json
+.DS_Store

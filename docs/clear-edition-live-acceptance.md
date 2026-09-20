@@ -2,7 +2,7 @@
 
 日期：2026-09-06（创建）。目标：把审计中标注"环境依赖"的功能升级为实测结论。
 
-应用：`/Users/shuke/Desktop/git中台/dist/Git Agent Clear.app`
+应用：`/Users/shuke/Desktop/个人/git中台/dist/Git Agent Clear.app`
 
 隔离测试仓库（沿用审计环境）：
 
@@ -13,7 +13,7 @@
 
 | 检查项 | 结果 | 影响 |
 |---|---|---|
-| `gh` CLI | 未安装 | 不影响应用内验收；仅无法用命令行核对 PR |
+| `gh` CLI | 已安装并登录 `awiggy` | 可用命令行核对仓库、Release 和 PR |
 | `~/.ssh` 密钥 | 无密钥 | SSH 推送项需要先导入或生成密钥 |
 | ssh-agent | 未运行 | 验收时可测试应用内 SSH Agent 流程本身 |
 | GPG 私钥 | 无 | GPG 签名提交项需要先有密钥 |
@@ -48,7 +48,7 @@
 - [ ] D2. 确认 Key 存入独立钥匙串服务 `Git Agent Clear`，重启应用后仍可用。
 - [ ] D3. 在三栏合并工具中对真实冲突跑一次 AI 建议，核对建议、理由和应用结果。
 
-### E. 自动更新（等待第一个 `clear-v*` Release）
+### E. 自动更新（独立源：`awiggy/git-clear-desktop`）
 
 - [ ] E1. 第一个 Clear Release 发布后，用本地构建的旧版本点"检查更新"，应发现新版本并只下载 `GitAgent-Clear-*` 资产。
 - [ ] E2. 确认更新不会触碰原版 `Git Agent.app`。

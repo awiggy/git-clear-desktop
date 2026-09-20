@@ -35,7 +35,7 @@ cat > "$contents_dir/Info.plist" <<PLIST
   <key>CFBundleDisplayName</key><string>Git Agent</string>
   <key>CFBundleExecutable</key><string>git-agent-clear</string>
   <key>CFBundleIconFile</key><string>GitAgent</string>
-  <key>CFBundleIdentifier</key><string>io.github.adoin.git-agent-clear</string>
+  <key>CFBundleIdentifier</key><string>io.github.awiggy.git-clear</string>
   <key>CFBundleInfoDictionaryVersion</key><string>6.0</string>
   <key>CFBundleName</key><string>Git Agent Clear</string>
   <key>CFBundlePackageType</key><string>APPL</string>

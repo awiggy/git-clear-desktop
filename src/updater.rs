@@ -11,16 +11,16 @@ use semver::Version;
 use serde::Deserialize;
 
 /// Update source configuration. Defaults point at this project's own repository
-/// (awiggy/git-clear); edition release builds (for example the Clear edition) override these
+/// (awiggy/git-clear-desktop); edition release builds (for example the Clear edition) override these
 /// at compile time. build.rs declares `rerun-if-env-changed` for every variable so changing
 /// them always rebuilds.
 pub const REPOSITORY_URL: &str = match option_env!("GIT_AGENT_UPDATE_REPOSITORY_URL") {
     Some(value) => value,
-    None => "https://github.com/awiggy/git-clear",
+    None => "https://github.com/awiggy/git-clear-desktop",
 };
 pub const RELEASE_PAGE_URL: &str = match option_env!("GIT_AGENT_UPDATE_RELEASE_PAGE_URL") {
     Some(value) => value,
-    None => "https://github.com/awiggy/git-clear/releases",
+    None => "https://github.com/awiggy/git-clear-desktop/releases",
 };
 /// Self-update stays off unless the build was produced with a dedicated release feed
 /// (`GIT_AGENT_SELF_UPDATE=1`). An edition must never install another edition's package over
@@ -46,15 +46,15 @@ pub const UPDATE_ASSET_STEM: &str = match option_env!("GIT_AGENT_UPDATE_ASSET_ST
 };
 const LATEST_RELEASE_API: &str = match option_env!("GIT_AGENT_UPDATE_LATEST_API") {
     Some(value) => value,
-    None => "https://api.github.com/repos/awiggy/git-clear/releases/latest",
+    None => "https://api.github.com/repos/awiggy/git-clear-desktop/releases/latest",
 };
 const RELEASES_API: &str = match option_env!("GIT_AGENT_UPDATE_RELEASES_API") {
     Some(value) => value,
-    None => "https://api.github.com/repos/awiggy/git-clear/releases",
+    None => "https://api.github.com/repos/awiggy/git-clear-desktop/releases",
 };
 const TRUSTED_DOWNLOAD_PREFIX: &str = match option_env!("GIT_AGENT_UPDATE_DOWNLOAD_PREFIX") {
     Some(value) => value,
-    None => "https://github.com/awiggy/git-clear/releases/download/",
+    None => "https://github.com/awiggy/git-clear-desktop/releases/download/",
 };
 const USER_AGENT: &str = "Git-Agent-Updater";
 
@@ -294,11 +294,11 @@ mod tests {
                 "tag_name":"v1.2.0",
                 "name":"Git Agent v1.2.0",
                 "body":"Release notes",
-                "html_url":"https://github.com/awiggy/git-clear/releases/tag/v1.2.0",
+                "html_url":"https://github.com/awiggy/git-clear-desktop/releases/tag/v1.2.0",
                 "assets":[
-                    {"name":"GitAgent_1.2.0_amd64.deb","browser_download_url":"https://github.com/awiggy/git-clear/releases/download/v1.2.0/GitAgent_1.2.0_amd64.deb","size":10},
-                    {"name":"GitAgent-1.2.0-macOS.dmg","browser_download_url":"https://github.com/awiggy/git-clear/releases/download/v1.2.0/GitAgent-1.2.0-macOS.dmg","size":20},
-                    {"name":"GitAgentSetup-v1.2.0.exe","browser_download_url":"https://github.com/awiggy/git-clear/releases/download/v1.2.0/GitAgentSetup-v1.2.0.exe","size":30}
+                    {"name":"GitAgent_1.2.0_amd64.deb","browser_download_url":"https://github.com/awiggy/git-clear-desktop/releases/download/v1.2.0/GitAgent_1.2.0_amd64.deb","size":10},
+                    {"name":"GitAgent-1.2.0-macOS.dmg","browser_download_url":"https://github.com/awiggy/git-clear-desktop/releases/download/v1.2.0/GitAgent-1.2.0-macOS.dmg","size":20},
+                    {"name":"GitAgentSetup-v1.2.0.exe","browser_download_url":"https://github.com/awiggy/git-clear-desktop/releases/download/v1.2.0/GitAgentSetup-v1.2.0.exe","size":30}
                 ]
             }"#,
         )
@@ -344,7 +344,7 @@ mod tests {
 
         let invalid_name = ReleaseAsset {
             name: "../GitAgentSetup-v1.2.0.exe".to_owned(),
-            download_url: "https://github.com/awiggy/git-clear/releases/download/v1.2.0/GitAgentSetup-v1.2.0.exe".to_owned(),
+            download_url: "https://github.com/awiggy/git-clear-desktop/releases/download/v1.2.0/GitAgentSetup-v1.2.0.exe".to_owned(),
             size: 10,
         };
         assert!(validate_release_asset(&invalid_name).is_err());
@@ -401,7 +401,7 @@ mod tests {
                 "tag_name": tag,
                 "name": tag,
                 "body": null,
-                "html_url": format!("https://github.com/awiggy/git-clear/releases/tag/{tag}"),
+                "html_url": format!("https://github.com/awiggy/git-clear-desktop/releases/tag/{tag}"),
                 "draft": draft,
                 "prerelease": prerelease,
                 "assets": []

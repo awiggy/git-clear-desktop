@@ -15272,7 +15272,23 @@ impl GitAgentApp {
                 {
                     worktree_action = Some(WorktreeMenuAction::UnstageAll);
                 }
-                if guided_text_button(ui, "放弃全部修改…", actions_enabled).clicked() {
+            });
+            ui.add_space(10.0);
+            ui.separator();
+            ui.add_space(8.0);
+            ui.horizontal_wrapped(|ui| {
+                ui.label(
+                    RichText::new("危险操作")
+                        .small()
+                        .strong()
+                        .color(destructive_action_color()),
+                );
+                ui.label(
+                    RichText::new("会删除尚未保存的本地内容，执行前会再次确认。")
+                        .small()
+                        .color(guided_muted()),
+                );
+                if guided_destructive_button(ui, "放弃全部修改…", actions_enabled).clicked() {
                     discard_all_requested = true;
                 }
             });
@@ -15685,6 +15701,34 @@ impl GitAgentApp {
             "查看历史版本",
             "点击一条记录只会查看内容；会改写历史的操作仍然需要二次确认。",
         );
+        let history_is_empty = self.snapshot.as_ref().is_some_and(|snapshot| {
+            snapshot.history_loaded
+                && snapshot.commits.is_empty()
+                && snapshot.all_date_commits.is_empty()
+        });
+        if history_is_empty {
+            guided_card_frame().show(ui, |ui| {
+                ui.vertical_centered(|ui| {
+                    ui.add_space(18.0);
+                    ui.label(
+                        RichText::new("当前还没有历史版本")
+                            .size(18.0)
+                            .strong()
+                            .color(guided_text()),
+                    );
+                    ui.label(
+                        RichText::new("先把当前改动保存成第一个本地版本，之后就能在这里查看、比较和恢复。")
+                            .color(guided_muted()),
+                    );
+                    ui.add_space(12.0);
+                    if guided_primary_button(ui, "去保存第一个版本", true).clicked() {
+                        self.guided_view = GuidedView::Changes;
+                    }
+                    ui.add_space(18.0);
+                });
+            });
+            return;
+        }
         let selected_commit = self
             .snapshot
             .as_ref()
@@ -16032,10 +16076,14 @@ impl GitAgentApp {
                     });
                 }
                 ui.add_space(18.0);
-                guided_impact_row(ui, "⇄", "合并", "把另一条工作线的成果放进当前工作线；若同一位置都改过，会进入冲突处理。");
-                guided_impact_row(ui, "↥", "变基", "重新排列当前工作线的起点，会改写尚未共享的历史；完成前可中止。");
-                guided_impact_row(ui, "↗", "远程跟踪", "记住本机工作线默认从哪里下载、往哪里上传。");
-                guided_impact_row(ui, "!", "删除", "删除本机或远程工作线前均会再次确认；当前工作线不可删除。");
+                egui::CollapsingHeader::new("了解合并、变基和远程操作（需要时展开）")
+                    .default_open(false)
+                    .show(ui, |ui| {
+                        guided_impact_row(ui, "⇄", "合并", "把另一条工作线的成果放进当前工作线；若同一位置都改过，会进入冲突处理。");
+                        guided_impact_row(ui, "↥", "变基", "重新排列当前工作线的起点，会改写尚未共享的历史；完成前可中止。");
+                        guided_impact_row(ui, "↗", "远程跟踪", "记住本机工作线默认从哪里下载、往哪里上传。");
+                        guided_impact_row(ui, "!", "删除", "删除本机或远程工作线前均会再次确认；当前工作线不可删除。");
+                    });
             });
         });
         if let Some(action) = requested_action {
@@ -16073,7 +16121,7 @@ impl GitAgentApp {
                 let staged_changed = ui
                     .checkbox(
                         &mut self.guided_stash_staged_files,
-                        "只收起已经放进本次保存的文件（仅 Staged）",
+                        "只收起已经选入下一次保存的改动",
                     )
                     .changed();
                 if staged_changed && self.guided_stash_staged_files {
@@ -16082,7 +16130,7 @@ impl GitAgentApp {
                 let keep_changed = ui
                     .checkbox(
                         &mut self.guided_stash_keep_staged,
-                        "保留已经放进本次保存的文件，只收起其余改动",
+                        "保留已经选入下一次保存的改动，只收起其余内容",
                     )
                     .changed();
                 if keep_changed && self.guided_stash_keep_staged {
@@ -38079,6 +38127,17 @@ fn guided_outline_button(ui: &mut Ui, label: &str, enabled: bool) -> egui::Respo
     )
 }
 
+fn guided_destructive_button(ui: &mut Ui, label: &str, enabled: bool) -> egui::Response {
+    text_action_button(
+        ui,
+        label,
+        None,
+        enabled,
+        TextActionTone::Destructive,
+        Vec2::new(132.0, 34.0),
+    )
+}
+
 fn guided_text_button(ui: &mut Ui, label: &str, enabled: bool) -> egui::Response {
     ui.add_enabled(
         enabled,
@@ -42770,7 +42829,7 @@ mod ui_tests {
         let package_script = include_str!("../installer/macos/package.sh");
         assert!(package_script.contains("app_name=\"Git Agent Clear\""));
         assert!(package_script.contains("CFBundleDisplayName</key><string>Git Agent"));
-        assert!(package_script.contains("io.github.adoin.git-agent-clear"));
+        assert!(package_script.contains("io.github.awiggy.git-clear"));
         assert!(package_script.contains("CFBundleExecutable</key><string>git-agent-clear"));
         assert!(package_script.contains("GitAgent-Clear-$version-macOS.dmg"));
         assert!(package_script.contains("echo \"Created $app_dir\""));
@@ -55796,6 +55855,47 @@ diff --git a/file.txt b/file.txt
         assert!(modal.contains("git::stash_drop"));
         assert!(modal.contains("dialog_destructive_button"));
         assert!(modal.contains("!self.branch_actions_busy()"));
+    }
+
+    #[test]
+    fn guided_usability_walkthrough_followups_reduce_beginner_risk_and_jargon() {
+        let source = include_str!("app.rs");
+        let implementation = &source[..source.find("#[cfg(test)]").unwrap()];
+
+        let changes_start = implementation.find("fn guided_changes_view(").unwrap();
+        let changes_end = implementation[changes_start..]
+            .find("fn guided_sync_view(")
+            .unwrap();
+        let changes = &implementation[changes_start..changes_start + changes_end];
+        assert!(changes.contains("危险操作"));
+        assert!(changes.contains("guided_destructive_button(ui, \"放弃全部修改…\""));
+        assert!(implementation.contains("fn guided_destructive_button("));
+
+        let history_start = implementation.find("fn guided_history_view(").unwrap();
+        let history_end = implementation[history_start..]
+            .find("fn guided_branches_view(")
+            .unwrap();
+        let history = &implementation[history_start..history_start + history_end];
+        assert!(history.contains("snapshot.history_loaded"));
+        assert!(history.contains("当前还没有历史版本"));
+        assert!(history.contains("去保存第一个版本"));
+        assert!(history.contains("self.guided_view = GuidedView::Changes"));
+
+        let branches_start = implementation.find("fn guided_branches_view(").unwrap();
+        let branches_end = implementation[branches_start..]
+            .find("fn guided_stash_view(")
+            .unwrap();
+        let branches = &implementation[branches_start..branches_start + branches_end];
+        assert!(branches.contains("了解合并、变基和远程操作（需要时展开）"));
+        assert!(branches.contains(".default_open(false)"));
+
+        let stash_start = implementation.find("fn guided_stash_view(").unwrap();
+        let stash_end = implementation[stash_start..]
+            .find("fn guided_advanced_view(")
+            .unwrap();
+        let stash = &implementation[stash_start..stash_start + stash_end];
+        assert!(stash.contains("只收起已经选入下一次保存的改动"));
+        assert!(!stash.contains("仅 Staged"));
     }
 
     #[test]
